@@ -1,0 +1,145 @@
+
+//sass: $
+@color: #999;
+@bgColor: skyblue;
+@width: 50%;
+#wrap {
+  color: @color;
+  background: @bgColor;
+  width: @width;
+}
+
+// sass: #{$variable}
+@Wrap: wrap;
+#@{Wrap}{
+  color:#666;
+}
+
+// sass: #{$variable}
+@borderStyle: border-style;
+@Soild:solid;
+#wrap{
+  @{borderStyle}: @Soild;
+}
+
+//sass: #{$variable}
+@images: "../img";
+body {
+  background: url("@{images}/dog.png");
+}
+
+//
+@fnord:  "I am fnord.";
+@var:    "fnord";
+#wrap::after{
+  content: @@var;
+}
+
+//sass: &
+#header{
+  &:after{
+    content:"Less is more!";
+  }
+  .title{
+    font-weight:bold;
+  }
+  &_content{
+    margin:20px;
+  }
+}
+
+
+#main{
+  //something...
+
+  @media screen{
+      @media (max-width:768px){
+        width:100px;
+      }
+  }
+  @media tv {
+    width:2000px;
+  }
+}
+
+
+//sass:extend
+.card { 
+  background: #f6f6f6;
+  -webkit-box-shadow: 0 1px 2px rgba(151, 151, 151, .58);
+  box-shadow: 0 1px 2px rgba(151, 151, 151, .58);
+}
+#wrap{
+.card;
+}
+
+//sass: @mixin @include
+.border(@a:10px,@b:50px,@c:30px,@color:#000){
+  border:solid 1px @color;
+  box-shadow: @arguments;
+}
+#main{
+  .border(0px,5px,30px,red);
+}
+
+//Polymorphism
+.triangle(top,@width:20px,@color:#000){
+  border-color:transparent  transparent @color transparent ;
+}
+.triangle(right,@width:20px,@color:#000){
+  border-color:transparent @color transparent  transparent ;
+}
+
+.triangle(bottom,@width:20px,@color:#000){
+  border-color:@color transparent  transparent  transparent ;
+}
+.triangle(left,@width:20px,@color:#000){
+  border-color:transparent  transparent  transparent @color;
+}
+.triangle(@_,@width:20px,@color:#000){
+  border-style: solid;
+  border-width: @width;
+}
+#main{
+  .triangle(left, 50px, #999)
+}
+
+
+//sass: @if @else if @else
+//less: when
+#card{
+  // and === &&
+  .border(@width,@color,@style) when (@width>100px) and(@color=#999){
+      border:@style @color @width;
+  }
+
+  // not === !
+  .background(@color) when not (@color>=#222){
+      background:@color;
+  }
+
+  // , === ||
+  .font(@size:20px) when (@size>50px) , (@size<100px){
+      font-size: @size;
+  }
+}
+#main{
+  #card>.border(200px,#999,solid);
+  #card .background(#111);
+  #card > .font(40px);
+}
+
+
+//unknown number of parameters
+.boxShadow(...){
+  box-shadow: @arguments;
+}
+.textShadow(@a,...){
+  text-shadow: @arguments;
+}
+#main{
+  .boxShadow(1px,4px,30px,red);
+  .textShadow(1px,4px,30px,red);
+}
+
+

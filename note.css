@@ -1,0 +1,26 @@
+#wrap {
+  color: #999;
+  background: skyblue;
+  width: 50%;
+}
+#wrap {
+  color: #666;
+}
+#wrap {
+  border-style: solid;
+}
+body {
+  background: url("../img/dog.png");
+}
+#wrap::after {
+  content: "I am fnord.";
+}
+#header:after {
+  content: "Less is more!";
+}
+#header .title {
+  font-weight: bold;
+}
+#header_content {
+  margin: 20px;
+}
